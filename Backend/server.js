@@ -5,7 +5,7 @@ const authRoutes = require("./routes/authRoutes")
 const assessmentRoutes = require("./routes/assessmentRoutes")
 const errorHandler = require("./middleware/errorMiddleware")
 require("dotenv").config()
-
+const resultRoutes = require("./routes/resultRoutes")
 const app = express()
 
 // Connect Database
@@ -19,6 +19,7 @@ app.use(express.json())
 // Routes
 app.use("/api/auth", authRoutes)
 app.use("/api/questions",assessmentRoutes)
+app.use("/api/results", resultRoutes)
 app.use(errorHandler)
 
 app.get("/", (req, res) => {
