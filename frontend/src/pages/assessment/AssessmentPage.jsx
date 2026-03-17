@@ -13,32 +13,43 @@ const AssessmentPage = () => {
 
 const { category } = useParams();
 
+
+
 useEffect(() => {
   let isMounted = true;
 
- const fetchData = async () => {
-  try {
-    const data = await getQuestions(category); 
-    if (isMounted) {
-      setQuestions(data);
+  const fetchData = async () => {
+    try {
+      const data = await getQuestions(category);
+      if (isMounted) {
+        setQuestions(data);
+        setCurrent(0);    
+        setAnswers({});    
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+  };
 
   fetchData();
 
   return () => {
     isMounted = false;
   };
-}, []);
-  const handleAnswer = (value) => {
-    setAnswers({
-      ...answers,
-      [questions[current]._id]: value,
-    });
-  };
+}, [category]);
+
+useEffect(() => {
+  if (!category) {
+    navigate("/assessment");
+  }
+}, [category, navigate]);
+
+const handleAnswer = (value) => {
+  setAnswers((prev) => ({
+    ...prev,
+    [question._id]: value,
+  }));
+};
 
   const next = () => {
     if (current < questions.length - 1) {
@@ -73,23 +84,25 @@ const handleSubmit = async () => {
 
     console.log("Formatted Answers:", formattedAnswers);
 
-    await submitAnswers(formattedAnswers);
+   const res = await submitAnswers(formattedAnswers);
 
-    navigate("/result");
+console.log("SUBMIT RESPONSE:", res);
+
+navigate("/result");
 
   } catch (error) {
     console.log(error);
   }
 };
 
-  if (!questions.length) {
-    return <div className="p-10 text-center">Loading...</div>;
-  }
+ if (!questions.length || !questions[current]) {
+  return <div className="p-10 text-center">Loading...</div>;
+}
+const question = questions[current];
 
-  const question = questions[current];
-  const progress = ((current + 1) / questions.length) * 100;
-
- return (
+const progress = ((current + 1) / questions.length) * 100;
+ 
+  return (
   <>
     <Navbar />
 
@@ -205,12 +218,12 @@ const handleSubmit = async () => {
               </button>
             ) : (
               <button
-                onClick={next}
-                disabled={!answers[question._id]}
-                className="px-5 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition disabled:opacity-50"
-              >
-                Next
-              </button>
+  onClick={next}
+  disabled={!answers[question._id]}
+  className="px-5 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition disabled:opacity-50"
+>
+  Next
+</button>
             )}
           </div>
         </div>

@@ -11,6 +11,11 @@ export const submitAnswers = async (answers) => {
 };
 
 export const getQuestions = async (category) => {
-  const res = await API.get(`/questions?category=${category}`);
-  return res.data;
+  if (category) {
+    const res = await API.get(`/questions?category=${category}`);
+    return res.data;
+  } else {
+    const res = await API.get(`/questions`);
+    return res.data;
+  }
 };

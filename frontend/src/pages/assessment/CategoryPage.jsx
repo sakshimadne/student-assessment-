@@ -1,57 +1,45 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/layout/Navbar";
 
 const categories = [
   "analytical",
   "creative",
   "social",
   "leadership",
-  "technical"
+  "technical",
 ];
 
 const CategoryPage = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Navbar />
+    <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
+      <div className="max-w-4xl w-full">
 
-      <div className="min-h-screen bg-gray-50 px-6 py-10">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+          Choose Assessment Category
+        </h1>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-          <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-            Choose Assessment Category
-          </h1>
+          {categories.map((category) => (
+            <div
+              key={category}
+              onClick={() => navigate(`/assessment/${category}`)}
+              className="bg-white p-6 rounded-2xl shadow-md cursor-pointer hover:shadow-lg transition"
+            >
+              <h2 className="text-lg font-medium capitalize text-gray-800">
+                {category}
+              </h2>
 
-          <p className="text-sm text-gray-500 mb-8">
-            Select a category to start your personalized assessment
-          </p>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-
-            {categories.map((cat) => (
-              <div
-                key={cat}
-                onClick={() => navigate(`/assessment/${cat}`)}
-                className="bg-white p-6 rounded-2xl shadow-md border cursor-pointer hover:shadow-lg transition"
-              >
-                <h2 className="text-lg font-medium capitalize text-gray-800">
-                  {cat}
-                </h2>
-
-                <p className="text-sm text-gray-500 mt-2">
-                  Explore your {cat} skills
-                </p>
-              </div>
-            ))}
-
-          </div>
+              <p className="text-sm text-gray-500 mt-2">
+                Start {category} assessment
+              </p>
+            </div>
+          ))}
 
         </div>
-
       </div>
-    </>
+    </div>
   );
 };
 

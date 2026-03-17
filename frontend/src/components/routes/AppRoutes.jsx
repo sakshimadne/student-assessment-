@@ -27,14 +27,7 @@ const AppRoutes = () => {
           }
         />
 
-        <Route
-          path="/assessment"
-          element={
-            <ProtectedRoute>
-              <AssessmentPage />
-            </ProtectedRoute>
-          }
-        />
+       
 
         <Route
           path="/result"
@@ -55,8 +48,23 @@ const AppRoutes = () => {
     </ProtectedRoute>
   }
 />
-<Route path="/assessment" element={<CategoryPage />} />
-<Route path="/assessment/:category" element={<AssessmentPage />} />
+<Route
+  path="/assessment"
+  element={
+    <ProtectedRoute>
+      <CategoryPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/assessment/:category"
+  element={
+    <ProtectedRoute>
+      <AssessmentPage />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </BrowserRouter>
   );

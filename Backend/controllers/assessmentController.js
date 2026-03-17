@@ -80,6 +80,7 @@ exports.submitTest = async(req,res)=>{
    const {answers} = req.body
 
    const userId = req.user.id
+   console.log("USER ID:", userId);
    if (!Array.isArray(answers)) {
   return res.status(400).json({
     message: "Answers must be array"
