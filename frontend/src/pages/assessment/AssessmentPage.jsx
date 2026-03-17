@@ -10,19 +10,28 @@ const AssessmentPage = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchQuestions();
-  }, []);
 
-  const fetchQuestions = async () => {
+
+useEffect(() => {
+  let isMounted = true;
+
+  const fetchData = async () => {
     try {
       const data = await getQuestions();
-      setQuestions(data);
+      if (isMounted) {
+        setQuestions(data);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
+  fetchData();
+
+  return () => {
+    isMounted = false;
+  };
+}, []);
   const handleAnswer = (value) => {
     setAnswers({
       ...answers,
@@ -37,20 +46,40 @@ const AssessmentPage = () => {
   };
 
   const prev = () => {
-    if (current > 0) {
+    if (current > 0) { 
       setCurrent(current - 1);
     }
   };
 
-  const handleSubmit = async () => {
-    console.log("SUBMIT CLICKED"); // 👈 ADD
-    try {
-      await submitAnswers(answers);
-      navigate("/result");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//   const handleSubmit = async () => {
+//     console.log("SUBMIT CLICKED"); // 👈 ADD
+//     try {
+//       await submitAnswers(answers);
+//       navigate("/result");
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+const handleSubmit = async () => {
+  console.log("SUBMIT CLICKED");
+
+  try {
+    // ✅ Convert object → array (IMPORTANT FIX)
+    const formattedAnswers = Object.keys(answers).map((questionId) => ({
+      questionId,
+      value: answers[questionId],
+    }));
+
+    console.log("Formatted Answers:", formattedAnswers);
+
+    await submitAnswers(formattedAnswers);
+
+    navigate("/result");
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   if (!questions.length) {
     return <div className="p-10 text-center">Loading...</div>;
