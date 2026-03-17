@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <motion.div
@@ -12,14 +17,45 @@ const Navbar = () => {
     >
       {/* LEFT */}
       <div className="flex items-center gap-8">
-        <h1 className="text-xl font-semibold text-gray-800">
+        
+        {/* LOGO CLICK */}
+        <h1
+          onClick={() => navigate("/")}
+          className="text-xl font-semibold text-gray-800 cursor-pointer"
+        >
           Career<span className="text-indigo-600">AI</span>
         </h1>
 
-        <div className="hidden md:flex gap-6 text-sm text-gray-500">
-          <span className="hover:text-indigo-600 cursor-pointer">Dashboard</span>
-          <span className="hover:text-indigo-600 cursor-pointer">Assessment</span>
-          <span className="hover:text-indigo-600 cursor-pointer">Results</span>
+        {/* NAV LINKS */}
+        <div className="hidden md:flex gap-6 text-sm font-medium">
+
+          <span
+            onClick={() => navigate("/")}
+            className={`cursor-pointer ${
+              isActive("/") ? "text-indigo-600" : "text-gray-500 hover:text-indigo-600"
+            }`}
+          >
+            Dashboard
+          </span>
+
+          <span
+            onClick={() => navigate("/assessment")}
+            className={`cursor-pointer ${
+              isActive("/assessment") ? "text-indigo-600" : "text-gray-500 hover:text-indigo-600"
+            }`}
+          >
+            Assessment
+          </span>
+
+          <span
+            onClick={() => navigate("/result")}
+            className={`cursor-pointer ${
+              isActive("/result") ? "text-indigo-600" : "text-gray-500 hover:text-indigo-600"
+            }`}
+          >
+            Results
+          </span>
+
         </div>
       </div>
 

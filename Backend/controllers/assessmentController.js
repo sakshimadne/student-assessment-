@@ -5,36 +5,39 @@ const generateInsights = require("../utils/insightGenerator");
 const Question = require("../models/Question")
 // Add question (Admin)
 exports.addQuestion = async (req, res) => {
+  try {
+    const { questionText, category } = req.body;
 
- try {
+    if (!questionText || !category) {
+      return res.status(400).json({
+        message: "Question text and category required"
+      });
+    }
 
-   const { questionText, category, options } = req.body
+    // ✅ DEFAULT OPTIONS (AUTO ADD)
+    const defaultOptions = [
+      { text: "Strongly Disagree", value: 1 },
+      { text: "Disagree", value: 2 },
+      { text: "Neutral", value: 3 },
+      { text: "Agree", value: 4 },
+      { text: "Strongly Agree", value: 5 }
+    ];
 
-   // Validation check
-   if (!questionText || !category) {
-     return res.status(400).json({
-       message: "Question text and category required"
-     })
-   }
+    const question = await Question.create({
+      questionText,
+      category,
+      options: defaultOptions
+    });
 
-   const question = await Question.create({
-     questionText,
-     category,
-     options
-   })
+    res.status(201).json({
+      message: "Question added successfully",
+      question
+    });
 
-   res.status(201).json({
-     message: "Question added successfully",
-     question
-   })
-
- } catch (error) {
-
-   res.status(500).json({ error: error.message })
-
- }
-
-}
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 // Get all questions
 exports.getQuestions = async (req, res) => {
