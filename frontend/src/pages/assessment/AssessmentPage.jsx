@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getQuestions, submitAnswers } from "../../api/questionApi";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
+import { useParams } from "react-router-dom";
 
 const AssessmentPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -10,21 +11,21 @@ const AssessmentPage = () => {
 
   const navigate = useNavigate();
 
-
+const { category } = useParams();
 
 useEffect(() => {
   let isMounted = true;
 
-  const fetchData = async () => {
-    try {
-      const data = await getQuestions();
-      if (isMounted) {
-        setQuestions(data);
-      }
-    } catch (error) {
-      console.log(error);
+ const fetchData = async () => {
+  try {
+    const data = await getQuestions(category); 
+    if (isMounted) {
+      setQuestions(data);
     }
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   fetchData();
 

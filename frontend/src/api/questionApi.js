@@ -10,7 +10,7 @@ export const submitAnswers = async (answers) => {
   return res.data;
 };
 
-export const getQuestions = async () => {
-  const res = await API.get("/questions");
+export const getQuestions = async (category) => {
+  const res = await API.get(`/questions?category=${category}`);
   return res.data;
 };

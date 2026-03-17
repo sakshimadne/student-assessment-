@@ -37,21 +37,41 @@ exports.addQuestion = async (req, res) => {
 }
 
 // Get all questions
-exports.getQuestions = async(req,res)=>{
+exports.getQuestions = async (req, res) => {
+  try {
 
- try{
+    const { category } = req.query;
 
-   const questions = await Question.find()
+    let filter = {};
 
-   res.json(questions)
+    if (category) {
 
- }catch(error){
+      // Optional: validate category
+      const validCategories = [
+        "analytical",
+        "creative",
+        "social",
+        "leadership",
+        "technical"
+      ];
 
-   res.status(500).json({error:error.message})
+      if (!validCategories.includes(category)) {
+        return res.status(400).json({
+          message: "Invalid category"
+        });
+      }
 
- }
+      filter.category = category;
+    }
 
-}
+    const questions = await Question.find(filter);
+
+    res.json(questions);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 exports.submitTest = async(req,res)=>{
 

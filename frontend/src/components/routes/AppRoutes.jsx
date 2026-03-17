@@ -7,7 +7,7 @@ import AssessmentPage from "../../pages/assessment/AssessmentPage";
 import ResultPage from "../../pages/result/ResultPage";
 import AddQuestionPage from "../../pages/admin/AddQuestionPage";
 import ProtectedRoute from "../layout/ProtectedRoute";
-
+import CategoryPage from "../../pages/assessment/CategoryPage";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -55,6 +55,8 @@ const AppRoutes = () => {
     </ProtectedRoute>
   }
 />
+<Route path="/assessment" element={<CategoryPage />} />
+<Route path="/assessment/:category" element={<AssessmentPage />} />
       </Routes>
     </BrowserRouter>
   );
