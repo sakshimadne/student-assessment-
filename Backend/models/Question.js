@@ -17,8 +17,19 @@ const questionSchema = new mongoose.Schema({
   {
     text:String,
     value:Number
-  }
- ]
+  },
+  
+ ],
+ reverse:{
+   type:Boolean,
+   default:false
+ },
+
+
+ weight:{
+   type:Number,
+   default:1
+ }
 
 })
 

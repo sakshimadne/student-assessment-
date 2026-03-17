@@ -14,6 +14,13 @@ const resultSchema = new mongoose.Schema({
    leadership:Number,
    technical:Number
  },
+ insights: {
+  analytical: String,
+  creative: String,
+  social: String,
+  leadership: String,
+  technical: String
+},
 
  recommendedCareers:[String]
 

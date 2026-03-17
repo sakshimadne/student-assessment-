@@ -1,6 +1,7 @@
 const TestSession = require("../models/TestSession")
 const Result = require("../models/Result")
 const recommendCareer = require("../utils/careerAlgorithm")
+const generateInsights = require("../utils/insightGenerator");
 const Question = require("../models/Question")
 // Add question (Admin)
 exports.addQuestion = async (req, res) => {
@@ -66,6 +67,11 @@ exports.submitTest = async(req,res)=>{
 }
 
    const questions = await Question.find()
+   const categoryCounts = {};
+
+questions.forEach(q => {
+  categoryCounts[q.category] = (categoryCounts[q.category] || 0) + 1;
+});
 const existingResult = await Result.findOne({ user: userId })
 
 if (existingResult) {
@@ -88,19 +94,40 @@ if (existingResult) {
         q => q._id.toString() === answer.questionId
      )
 
-     if(question){
-        scores[question.category] += answer.value
-     }
+   if (question) {
+
+  let scoreValue = answer.value;
+
+
+  if (question.reverse) {
+    scoreValue = 6 - answer.value;
+  }
+
+
+  scoreValue = scoreValue * (question.weight || 1);
+
+  scores[question.category] += scoreValue;
+}
 
    })
 
+Object.keys(scores).forEach(category => {
+
+  const maxScore = categoryCounts[category] * 5;
+
+  scores[category] = Math.round(
+    (scores[category] / maxScore) * 100
+  );
+
+});
    const careers = recommendCareer(scores)
-
-   const result = await Result.create({
-     user:userId,
-     scores,
-     recommendedCareers:careers
-   })
+const insights = generateInsights(scores);
+ const result = await Result.create({
+  user:userId,
+  scores,
+  recommendedCareers:careers,
+  insights
+})
 
    await TestSession.create({
      user:userId,

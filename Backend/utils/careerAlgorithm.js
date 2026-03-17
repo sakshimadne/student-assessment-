@@ -1,27 +1,24 @@
-const recommendCareer = (scores)=>{
+const recommendCareer = (scores) => {
 
- const careers=[]
+  const careers = [];
 
- if(scores.analytical > 15 && scores.technical > 15){
-   careers.push("Software Engineer")
-   careers.push("Data Scientist")
- }
+  if (scores.analytical > 70 && scores.technical > 70) {
+    careers.push("Software Engineer", "Data Scientist");
+  }
 
- if(scores.creative > 15){
-   careers.push("Graphic Designer")
- }
+  if (scores.creative > 70) {
+    careers.push("UI/UX Designer", "Content Creator");
+  }
 
- if(scores.social > 15){
-   careers.push("HR Manager")
-   careers.push("Teacher")
- }
+  if (scores.social > 70) {
+    careers.push("HR Manager", "Teacher");
+  }
 
- if(scores.leadership > 15){
-   careers.push("Project Manager")
- }
+  if (scores.leadership > 70) {
+    careers.push("Project Manager", "Entrepreneur");
+  }
 
- return careers
+  return careers;
+};
 
-}
-
-module.exports = recommendCareer
+module.exports = recommendCareer;
