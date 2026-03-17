@@ -1,24 +1,18 @@
 const recommendCareer = (scores) => {
+  const sorted = Object.entries(scores)
+    .sort((a, b) => b[1] - a[1]);
 
-  const careers = [];
+  const topCategory = sorted[0][0];
 
-  if (scores.analytical > 70 && scores.technical > 70) {
-    careers.push("Software Engineer", "Data Scientist");
-  }
+  const mapping = {
+    analytical: ["Data Scientist", "Business Analyst"],
+    creative: ["UI/UX Designer", "Content Creator"],
+    social: ["Teacher", "Counselor"],
+    leadership: ["Manager", "Entrepreneur"],
+    technical: ["Software Engineer", "DevOps Engineer"],
+  };
 
-  if (scores.creative > 70) {
-    careers.push("UI/UX Designer", "Content Creator");
-  }
-
-  if (scores.social > 70) {
-    careers.push("HR Manager", "Teacher");
-  }
-
-  if (scores.leadership > 70) {
-    careers.push("Project Manager", "Entrepreneur");
-  }
-
-  return careers;
+  return mapping[topCategory] || [];
 };
 
 module.exports = recommendCareer;

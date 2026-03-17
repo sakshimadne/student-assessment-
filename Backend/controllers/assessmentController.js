@@ -73,102 +73,101 @@ exports.getQuestions = async (req, res) => {
   }
 };
 
-exports.submitTest = async(req,res)=>{
+exports.submitTest = async (req, res) => {
+  try {
+    const { answers } = req.body;
+    const userId = req.user.id;
 
- try{
+    console.log("USER ID:", userId);
 
-   const {answers} = req.body
+    if (!Array.isArray(answers)) {
+      return res.status(400).json({
+        message: "Answers must be array"
+      });
+    }
 
-   const userId = req.user.id
-   console.log("USER ID:", userId);
-   if (!Array.isArray(answers)) {
-  return res.status(400).json({
-    message: "Answers must be array"
-  });
-}
+    const questions = await Question.find();
 
-   const questions = await Question.find()
-   const categoryCounts = {};
+    // Count questions per category
+    const categoryCounts = {};
+    questions.forEach(q => {
+      categoryCounts[q.category] =
+        (categoryCounts[q.category] || 0) + 1;
+    });
 
-questions.forEach(q => {
-  categoryCounts[q.category] = (categoryCounts[q.category] || 0) + 1;
-});
-const existingResult = await Result.findOne({ user: userId })
+    // Initialize scores
+    const scores = {
+      analytical: 0,
+      creative: 0,
+      social: 0,
+      leadership: 0,
+      technical: 0
+    };
 
-if (existingResult) {
-  return res.json({
-    message: "Test already completed",
-    result: existingResult
-  })
-}
-   const scores={
-     analytical:0,
-     creative:0,
-     social:0,
-     leadership:0,
-     technical:0
-   }
-
-   answers.forEach(answer => {
-
-     const question = questions.find(
+    // Calculate raw scores
+    answers.forEach(answer => {
+      const question = questions.find(
         q => q._id.toString() === answer.questionId
-     )
+      );
 
-   if (question) {
+      if (question) {
+        let scoreValue = answer.value;
 
-  let scoreValue = answer.value;
+        if (question.reverse) {
+          scoreValue = 6 - answer.value;
+        }
 
+        scoreValue = scoreValue * (question.weight || 1);
 
-  if (question.reverse) {
-    scoreValue = 6 - answer.value;
+        scores[question.category] += scoreValue;
+      }
+    });
+
+    // Normalize to percentage
+    Object.keys(scores).forEach(category => {
+      const maxScore = categoryCounts[category] * 5;
+
+      scores[category] = Math.round(
+        (scores[category] / maxScore) * 100
+      );
+    });
+
+    // Generate career + insights
+    const careers = recommendCareer(scores);
+    const insights = generateInsights(scores);
+
+    // ✅ UPDATE OR CREATE RESULT
+    const result = await Result.findOneAndUpdate(
+      { user: userId },
+      {
+        user: userId,
+        scores,
+        recommendedCareers: careers,
+        insights
+      },
+      {
+        new: true,
+        upsert: true
+      }
+    );
+
+    // Save test session
+    await TestSession.create({
+      user: userId,
+      answers,
+      completed: true
+    });
+
+    res.json({
+      message: "Test submitted successfully",
+      result
+    });
+
+  } catch (error) {
+    console.log("ERROR IN SUBMIT:", error);
+    res.status(500).json({ error: error.message });
   }
-
-
-  scoreValue = scoreValue * (question.weight || 1);
-
-  scores[question.category] += scoreValue;
-}
-
-   })
-
-Object.keys(scores).forEach(category => {
-
-  const maxScore = categoryCounts[category] * 5;
-
-  scores[category] = Math.round(
-    (scores[category] / maxScore) * 100
-  );
-
-});
-   const careers = recommendCareer(scores)
-const insights = generateInsights(scores);
- const result = await Result.create({
-  user:userId,
-  scores,
-  recommendedCareers:careers,
-  insights
-})
-
-   await TestSession.create({
-     user:userId,
-     answers,
-     completed:true
-   })
-
-   res.json({
-     message:"Test submitted successfully",
-     result
-   })
-
- }catch(error){
-
-   console.log("ERROR IN SUBMIT:", error); 
-   res.status(500).json({error:error.message})
-
-}
-
-}
+};
 
 
 

@@ -23,7 +23,7 @@ const ResultPage = () => {
  useEffect(() => {
     fetchResult();
   }, []);
-  
+
  if (!result) {
   return (
     <div className="p-10 text-center">
@@ -32,7 +32,11 @@ const ResultPage = () => {
   );
 }
 
-  const { scores, recommendedCareers, insights } = result;
+ const {
+  scores = {},
+  recommendedCareers = [],
+  insights = {},
+} = result;
 
   return (
     <>
@@ -52,64 +56,97 @@ const ResultPage = () => {
           </div>
 
           {/* SCORES */}
-          <div>
+          {/* <div>
+
             <h2 className="text-xl font-semibold text-gray-800 mb-4">
               Your Strengths
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
 
-              {Object.entries(scores).map(([key, value]) => (
-                <div
-                  key={key}
-                  className="bg-white p-5 rounded-xl shadow-sm border"
-                >
-                  <p className="text-sm text-gray-500 capitalize">
-                    {key}
-                  </p>
-
-                  <h3 className="text-2xl font-semibold text-indigo-600 mt-1">
-                    {value}%
-                  </h3>
-
-                  {/* Progress Bar */}
-                  <div className="w-full bg-gray-200 h-2 rounded-full mt-3">
-                    <div
-                      className="bg-indigo-600 h-2 rounded-full"
-                      style={{ width: `${value}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
+           {insights && Object.keys(insights).length > 0 ? (
+  Object.entries(insights).map(([key, text]) => (
+    <div key={key} className="bg-white p-5 rounded-xl border shadow-sm">
+      <h3 className="text-sm font-medium text-indigo-600 capitalize">
+        {key}
+      </h3>
+      <p className="text-sm text-gray-600 mt-2">
+        {text}
+      </p>
+    </div>
+  ))
+) : (
+  <p className="text-gray-500 text-sm">
+    No insights available yet.
+  </p>
+)}
 
             </div>
-          </div>
+          </div> */}
+{/* SCORES */}
+<div>
+  <h2 className="text-xl font-semibold text-gray-800 mb-4">
+    Your Strengths
+  </h2>
 
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+
+    {Object.entries(scores).map(([key, value]) => (
+      <div
+        key={key}
+        className="bg-white p-5 rounded-xl border shadow-sm"
+      >
+        <p className="text-sm text-gray-500 capitalize">
+          {key}
+        </p>
+
+        <h3 className="text-2xl font-semibold text-indigo-600 mt-1">
+          {value}%
+        </h3>
+
+        <div className="w-full bg-gray-200 h-2 rounded-full mt-3">
+          <div
+            className="bg-indigo-600 h-2 rounded-full"
+            style={{ width: `${value}%` }}
+          />
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
           {/* CAREERS */}
-          <div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
-              Recommended Careers 🚀
-            </h2>
+        {/* CAREERS */}
+<div>
+  <h2 className="text-xl font-semibold text-gray-800 mb-4">
+    Recommended Careers 🚀
+  </h2>
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+  <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
 
-              {recommendedCareers.map((career, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-5 rounded-xl border shadow-sm hover:shadow-md transition"
-                >
-                  <h3 className="text-lg font-medium text-gray-800">
-                    {career}
-                  </h3>
+    {recommendedCareers.length > 0 ? (
+      recommendedCareers.map((career, index) => (
+        <div
+          key={index}
+          className="bg-white p-5 rounded-xl border shadow-sm hover:shadow-md transition"
+        >
+          <h3 className="text-lg font-medium text-gray-800">
+            {career}
+          </h3>
 
-                  <p className="text-sm text-gray-500 mt-2">
-                    Matches your strengths and interests
-                  </p>
-                </div>
-              ))}
+          <p className="text-sm text-gray-500 mt-2">
+            Matches your strengths and interests
+          </p>
+        </div>
+      ))
+    ) : (
+      <p className="text-gray-500 text-sm col-span-full">
+        No career recommendations yet.
+      </p>
+    )}
 
-            </div>
-          </div>
+  </div>
+</div>
 
           {/* INSIGHTS */}
           <div>
