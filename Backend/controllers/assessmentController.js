@@ -58,7 +58,12 @@ exports.submitTest = async(req,res)=>{
 
    const {answers} = req.body
 
-   const userId = req.user
+   const userId = req.user.id
+   if (!Array.isArray(answers)) {
+  return res.status(400).json({
+    message: "Answers must be array"
+  });
+}
 
    const questions = await Question.find()
 const existingResult = await Result.findOne({ user: userId })
@@ -110,9 +115,10 @@ if (existingResult) {
 
  }catch(error){
 
+   console.log("ERROR IN SUBMIT:", error); 
    res.status(500).json({error:error.message})
 
- }
+}
 
 }
 

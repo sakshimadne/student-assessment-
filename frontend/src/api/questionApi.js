@@ -6,7 +6,7 @@ export const addQuestion = async (data) => {
 };
 
 export const submitAnswers = async (answers) => {
-  const res = await API.post("/answers/submit", { answers });
+  const res = await API.post("/questions/submit", { answers });
   return res.data;
 };
 

@@ -43,6 +43,7 @@ const AssessmentPage = () => {
   };
 
   const handleSubmit = async () => {
+    console.log("SUBMIT CLICKED"); // 👈 ADD
     try {
       await submitAnswers(answers);
       navigate("/result");
