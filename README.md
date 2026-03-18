@@ -65,20 +65,57 @@
 
 
 src/
-│── api/ # API calls (axios)
-│── components/
-│ ├── assessment/ # Question UI components
-│ ├── common/ # Reusable components
-│ ├── layout/ # Navbar, ProtectedRoute
-│── pages/
-│ ├── admin/
+├── api/
+│ ├── authApi.js
+│ ├── axiosInstance.js
+│ └── questionApi.js
+│
+├── components/
 │ ├── assessment/
+│ │ ├── OptionCard.jsx
+│ │ ├── ProgressBar.jsx
+│ │ └── QuestionCard.jsx
+│ │
+│ ├── common/
+│ │ ├── Button.jsx
+│ │ ├── Card.jsx
+│ │ └── Input.jsx
+│ │
+│ └── layout/
+│ ├── Navbar.jsx
+│ └── ProtectedRoute.jsx
+│
+├── pages/
+│ ├── admin/
+│ │ └── AddQuestionPage.jsx
+│ │
+│ ├── assessment/
+│ │ ├── AssessmentPage.jsx
+│ │ └── CategoryPage.jsx
+│ │
 │ ├── auth/
+│ │ ├── LoginPage.jsx
+│ │ └── RegisterPage.jsx
+│ │
 │ ├── dashboard/
-│ ├── result/
-│── context/ # Auth context
-│── hooks/ # Custom hooks
-│── utils/ # Constants
+│ │ └── DashboardPage.jsx
+│ │
+│ └── result/
+│ └── ResultPage.jsx
+│
+├── context/
+│ ├── AuthContext.js
+│ └── AuthProvider.jsx
+│
+├── hooks/
+│ └── useAuth.js
+│
+├── utils/
+│ └── constants.js
+│
+├── App.jsx
+├── App.css
+└── index.css
 
 
 ---
@@ -87,35 +124,34 @@ src/
 
 
 backend/
-│── config/
-│ └── db.js # MongoDB connection
+├── config/
+│ └── db.js
 │
-│── controllers/
+├── controllers/
 │ ├── authController.js
 │ ├── assessmentController.js
 │ └── resultController.js
 │
-│── middleware/
+├── middleware/
 │ ├── authMiddleware.js
 │ ├── adminMiddleware.js
 │ └── errorMiddleware.js
 │
-│── models/
+├── models/
 │ ├── User.js
 │ ├── Question.js
 │ ├── Result.js
 │ └── TestSession.js
 │
-│── routes/
+├── routes/
 │ ├── authRoutes.js
 │ ├── assessmentRoutes.js
 │ └── resultRoutes.js
 │
-│── utils/
+├── utils/
 │ └── careerAlgorithm.js
 │
-│── server.js
-
+└── server.js
 
 ---
 
