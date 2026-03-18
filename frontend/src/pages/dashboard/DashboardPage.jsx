@@ -11,7 +11,7 @@ return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-6 py-10">
       <div className="max-w-6xl mx-auto space-y-10">
 
-        {/* HEADER */}
+      
         <div>
           <h1 className="text-3xl font-bold text-gray-800">
             Welcome 👋
@@ -21,7 +21,7 @@ return (
           </p>
         </div>
 
-        {/* HERO */}
+    
         <div className="relative rounded-3xl overflow-hidden shadow-xl">
           <img
             src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
@@ -46,7 +46,7 @@ return (
           </div>
         </div>
 
-        {/* STATS */}
+       
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <p className="text-xs text-gray-500">Tests Taken</p>
@@ -69,10 +69,10 @@ return (
           </div>
         </div>
 
-        {/* ACTION CARDS */}
+        
         <div className="grid md:grid-cols-2 gap-6">
 
-          {/* RESULT */}
+      
           <div className="bg-white rounded-2xl p-6 shadow-md border flex justify-between items-center">
             <div>
               <h3 className="text-gray-800 font-semibold text-lg">
@@ -91,7 +91,7 @@ return (
             </button>
           </div>
 
-          {/* ADMIN */}
+    
           {user?.role === "admin" && (
             <div className="bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-2xl p-6 flex justify-between items-center">
               <div>
@@ -113,10 +113,9 @@ return (
           )}
         </div>
 
-        {/* SECOND ROW */}
+     
         <div className="grid md:grid-cols-2 gap-6">
 
-          {/* PROGRESS */}
           <div className="bg-white rounded-2xl p-6 shadow-md border">
             <h3 className="text-lg font-semibold mb-4">
               Your Progress 📈
@@ -145,7 +144,6 @@ return (
             </div>
           </div>
 
-          {/* ACTIVITY */}
           <div className="bg-white rounded-2xl p-6 shadow-md border">
             <h3 className="text-lg font-semibold mb-4">
               Recent Activity 🕒
@@ -170,7 +168,7 @@ return (
           </div>
         </div>
 
-        {/* TIP */}
+   
         <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl p-6 shadow-md">
           <h3 className="text-lg font-semibold mb-2">
             💡 Career Tip

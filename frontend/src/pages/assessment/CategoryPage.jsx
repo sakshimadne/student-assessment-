@@ -20,7 +20,7 @@ const CategoryPage = () => {
       <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-6 py-10">
         <div className="max-w-6xl mx-auto space-y-10">
 
-          {/* HEADER */}
+  
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-800">
               Choose Your Assessment 🎯
@@ -30,7 +30,6 @@ const CategoryPage = () => {
             </p>
           </div>
 
-          {/* HERO INFO */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl p-6 shadow-lg text-center">
             <h2 className="text-xl font-semibold">
               Discover Your True Potential 🚀
@@ -40,7 +39,7 @@ const CategoryPage = () => {
             </p>
           </div>
 
-          {/* CATEGORY GRID */}
+       
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
             {categories.map((category, index) => (
@@ -54,25 +53,22 @@ const CategoryPage = () => {
               >
                 <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition relative overflow-hidden">
 
-                  {/* TOP COLOR BAR */}
                   <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${category.color}`} />
 
-                  {/* ICON */}
+               
                   <div className="text-3xl mb-4">
                     {category.icon}
                   </div>
 
-                  {/* TITLE */}
                   <h2 className="text-lg font-semibold capitalize text-gray-800 group-hover:text-indigo-600 transition">
                     {category.name}
                   </h2>
 
-                  {/* DESCRIPTION */}
+          
                   <p className="text-sm text-gray-500 mt-2">
                     Start your {category.name} assessment and unlock insights.
                   </p>
 
-                  {/* HOVER EFFECT */}
                   <div className="mt-4 text-sm text-indigo-600 opacity-0 group-hover:opacity-100 transition">
                     Start Now →
                   </div>
@@ -83,7 +79,7 @@ const CategoryPage = () => {
 
           </div>
 
-          {/* EXTRA INFO */}
+        
           <div className="grid md:grid-cols-3 gap-6">
 
             <div className="bg-white p-5 rounded-xl shadow-sm border">

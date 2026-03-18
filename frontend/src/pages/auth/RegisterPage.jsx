@@ -41,13 +41,13 @@ const [formData, setFormData] = useState({
  return (
   <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100 flex items-center justify-center px-4 relative overflow-hidden">
 
-    {/* BACKGROUND BLOBS */}
+
     <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 opacity-20 blur-3xl rounded-full"></div>
     <div className="absolute bottom-0 right-0 w-72 h-72 bg-indigo-300 opacity-20 blur-3xl rounded-full"></div>
 
     <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center relative z-10">
 
-      {/* LEFT SIDE (BRANDING) */}
+
       <div className="hidden md:block space-y-6">
 
         <h1 className="text-4xl font-bold text-gray-800">
@@ -58,7 +58,7 @@ const [formData, setFormData] = useState({
           Start your journey towards discovering your strengths and ideal career path.
         </p>
 
-        {/* BENEFITS */}
+      
         <div className="space-y-4 text-sm text-gray-600">
 
           <div className="flex items-center gap-3">
@@ -80,10 +80,10 @@ const [formData, setFormData] = useState({
 
       </div>
 
-      {/* RIGHT SIDE (FORM) */}
+ 
       <div className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border">
 
-        {/* HEADER */}
+     
         <div className="mb-6 text-center">
           <h2 className="text-2xl font-bold text-gray-800">
             Create Account ✨
@@ -93,7 +93,7 @@ const [formData, setFormData] = useState({
           </p>
         </div>
 
-        {/* FORM */}
+      
         <form onSubmit={handleSubmit} className="space-y-4">
 
           <input
@@ -146,7 +146,6 @@ const [formData, setFormData] = useState({
 
         </form>
 
-        {/* FOOTER */}
         <p className="text-sm text-center mt-5 text-gray-600">
           Already have an account?{" "}
           <span

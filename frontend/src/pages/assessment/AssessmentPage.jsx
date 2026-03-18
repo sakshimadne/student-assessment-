@@ -63,20 +63,12 @@ const handleAnswer = (value) => {
     }
   };
 
-//   const handleSubmit = async () => {
-//     console.log("SUBMIT CLICKED"); // 👈 ADD
-//     try {
-//       await submitAnswers(answers);
-//       navigate("/result");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+
 const handleSubmit = async () => {
   console.log("SUBMIT CLICKED");
 
   try {
-    // ✅ Convert object → array (IMPORTANT FIX)
+
     const formattedAnswers = Object.keys(answers).map((questionId) => ({
       questionId,
       value: answers[questionId],
@@ -108,13 +100,13 @@ return (
 
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100 px-4 py-10 relative overflow-hidden">
 
-      {/* BACKGROUND DECOR */}
+
       <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 opacity-20 blur-3xl rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-indigo-300 opacity-20 blur-3xl rounded-full"></div>
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center relative z-10">
 
-        {/* LEFT PANEL */}
+      
         <div className="space-y-6 hidden md:block">
 
           <div>
@@ -126,7 +118,7 @@ return (
             </p>
           </div>
 
-          {/* GUIDE */}
+        
           <div className="bg-white/70 backdrop-blur-xl p-6 rounded-2xl shadow-lg border">
             <h3 className="font-semibold text-gray-800 mb-3">
               How to answer
@@ -139,7 +131,7 @@ return (
             </ul>
           </div>
 
-          {/* PROGRESS */}
+     
           <div className="bg-white p-6 rounded-2xl shadow-lg border">
             <div className="flex justify-between text-sm text-gray-500 mb-2">
               <span>Progress</span>
@@ -154,7 +146,7 @@ return (
             </div>
           </div>
 
-          {/* SCALE VISUAL */}
+      
           <div className="bg-white p-5 rounded-2xl shadow-md border">
             <p className="text-sm text-gray-500 mb-2">
               Response Scale
@@ -168,15 +160,15 @@ return (
 
         </div>
 
-        {/* RIGHT PANEL */}
+
         <div className="w-full max-w-xl mx-auto">
 
           <div className="bg-white/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border relative">
 
-            {/* GLOW EFFECT */}
+    
             <div className="absolute -top-5 -right-5 w-24 h-24 bg-purple-400 opacity-20 blur-2xl rounded-full"></div>
 
-            {/* HEADER */}
+   
             <div className="flex justify-between items-center mb-4">
               <p className="text-sm text-gray-500">
                 Question {current + 1} / {questions.length}
@@ -187,12 +179,11 @@ return (
               </span>
             </div>
 
-            {/* QUESTION */}
             <h2 className="text-xl font-semibold text-gray-800 mb-6 leading-snug">
               {question.questionText}
             </h2>
 
-            {/* OPTIONS */}
+     
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
 
               {question.options?.map((opt) => (
@@ -211,7 +202,7 @@ return (
               ))}
             </div>
 
-            {/* NAV */}
+         
             <div className="flex justify-between items-center">
 
               <button

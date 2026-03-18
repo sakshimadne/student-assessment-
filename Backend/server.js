@@ -8,15 +8,15 @@ require("dotenv").config()
 const resultRoutes = require("./routes/resultRoutes")
 const app = express()
 
-// Connect Database
+
 connectDB()
 
-// Middlewares
+
 app.use(cors())
 app.use(express.json())
 
 
-// Routes
+
 app.use("/api/auth", authRoutes)
 app.use("/api/questions",assessmentRoutes)
 app.use("/api/results", resultRoutes)

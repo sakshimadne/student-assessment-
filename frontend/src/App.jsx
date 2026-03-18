@@ -6,7 +6,7 @@ function App() {
     <>
       <AppRoutes />
 
-      {/* TOASTER (GLOBAL) */}
+   
       <Toaster
         position="top-right"
         reverseOrder={false}

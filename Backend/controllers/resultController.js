@@ -21,7 +21,7 @@ exports.getMyResult = async (req, res) => {
 };
 
 
-// Admin: Get all results
+
 exports.getAllResults = async (req, res) => {
   try {
 

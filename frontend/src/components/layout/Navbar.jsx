@@ -15,10 +15,10 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       className="w-full bg-white/80 backdrop-blur border-b px-8 py-3 flex justify-between items-center sticky top-0 z-50"
     >
-      {/* LEFT */}
+
       <div className="flex items-center gap-8">
         
-        {/* LOGO CLICK */}
+
         <h1
           onClick={() => navigate("/")}
           className="text-xl font-semibold text-gray-800 cursor-pointer"
@@ -26,7 +26,7 @@ const Navbar = () => {
           Career<span className="text-indigo-600">AI</span>
         </h1>
 
-        {/* NAV LINKS */}
+    
         <div className="hidden md:flex gap-6 text-sm font-medium">
 
           <span
@@ -59,7 +59,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* RIGHT */}
+
       <div className="flex items-center gap-4">
         <span className="text-sm text-gray-500">{user?.name}</span>
 

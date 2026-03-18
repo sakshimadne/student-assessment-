@@ -3,7 +3,7 @@ const Result = require("../models/Result")
 const recommendCareer = require("../utils/careerAlgorithm")
 const generateInsights = require("../utils/insightGenerator");
 const Question = require("../models/Question")
-// Add question (Admin)
+
 exports.addQuestion = async (req, res) => {
   try {
     const { questionText, category } = req.body;
@@ -14,7 +14,6 @@ exports.addQuestion = async (req, res) => {
       });
     }
 
-    // ✅ DEFAULT OPTIONS (AUTO ADD)
     const defaultOptions = [
       { text: "Strongly Disagree", value: 1 },
       { text: "Disagree", value: 2 },
@@ -39,7 +38,7 @@ exports.addQuestion = async (req, res) => {
   }
 };
 
-// Get all questions
+
 exports.getQuestions = async (req, res) => {
   try {
 
@@ -49,7 +48,7 @@ exports.getQuestions = async (req, res) => {
 
     if (category) {
 
-      // Optional: validate category
+  
       const validCategories = [
         "analytical",
         "creative",
@@ -91,14 +90,13 @@ exports.submitTest = async (req, res) => {
 
     const questions = await Question.find();
 
-    // Count questions per category
+  
     const categoryCounts = {};
     questions.forEach(q => {
       categoryCounts[q.category] =
         (categoryCounts[q.category] || 0) + 1;
     });
 
-    // Initialize scores
     const scores = {
       analytical: 0,
       creative: 0,
@@ -107,7 +105,7 @@ exports.submitTest = async (req, res) => {
       technical: 0
     };
 
-    // Calculate raw scores
+  
     answers.forEach(answer => {
       const question = questions.find(
         q => q._id.toString() === answer.questionId
@@ -126,7 +124,7 @@ exports.submitTest = async (req, res) => {
       }
     });
 
-    // Normalize to percentage
+  
     Object.keys(scores).forEach(category => {
       const maxScore = categoryCounts[category] * 5;
 
@@ -135,11 +133,10 @@ exports.submitTest = async (req, res) => {
       );
     });
 
-    // Generate career + insights
+
     const careers = recommendCareer(scores);
     const insights = generateInsights(scores);
 
-    // ✅ UPDATE OR CREATE RESULT
     const result = await Result.findOneAndUpdate(
       { user: userId },
       {
@@ -154,7 +151,6 @@ exports.submitTest = async (req, res) => {
       }
     );
 
-    // Save test session
     await TestSession.create({
       user: userId,
       answers,

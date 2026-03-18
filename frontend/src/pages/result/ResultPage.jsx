@@ -20,7 +20,7 @@ const ResultPage = () => {
   try {
     const res = await API.get("/results/my-result");
 
-    console.log("RESULT DATA:", res.data); // 👈 DEBUG
+    console.log("RESULT DATA:", res.data); 
 
     setResult(res.data);
   } catch (error) {
@@ -38,19 +38,18 @@ if (!result) {
 
       <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center relative overflow-hidden">
 
-        {/* BACKGROUND BLOBS */}
+
         <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 opacity-20 blur-3xl rounded-full"></div>
         <div className="absolute bottom-0 right-0 w-72 h-72 bg-indigo-300 opacity-20 blur-3xl rounded-full"></div>
 
-        {/* LOADER CARD */}
+      
         <div className="bg-white/80 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border text-center space-y-6 relative z-10">
 
-          {/* SPINNER */}
+       
           <div className="flex justify-center">
             <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
 
-          {/* TEXT */}
           <div>
             <h2 className="text-lg font-semibold text-gray-800">
               Analyzing your results...
@@ -79,13 +78,13 @@ return (
 
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-6 py-10 relative overflow-hidden">
 
-      {/* BACKGROUND BLOBS */}
+
       <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 opacity-20 blur-3xl rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-indigo-300 opacity-20 blur-3xl rounded-full"></div>
 
       <div className="max-w-6xl mx-auto space-y-10 relative z-10">
 
-        {/* HERO */}
+
         <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 rounded-3xl shadow-xl">
           <h1 className="text-3xl font-bold">
             Your Assessment Result 🎯
@@ -95,8 +94,7 @@ return (
           </p>
         </div>
 
-        {/* GRAPH SECTION */}
-       {/* GRAPH + SUMMARY */}
+  
 <div className="bg-white/80 backdrop-blur p-6 rounded-3xl shadow-xl border">
 
   <h2 className="text-xl font-semibold text-gray-800 mb-6">
@@ -105,7 +103,7 @@ return (
 
   <div className="grid md:grid-cols-2 gap-8 items-center">
 
-    {/* LEFT: CHART */}
+
     <div className="w-full h-[300px]">
 
       <ResponsiveContainer>
@@ -138,10 +136,9 @@ return (
 
     </div>
 
-    {/* RIGHT: SUMMARY */}
     <div className="space-y-5">
 
-      {/* TOP SKILL */}
+
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 rounded-xl shadow">
         <p className="text-xs opacity-80">Top Strength</p>
         <h3 className="text-lg font-semibold capitalize">
@@ -149,7 +146,6 @@ return (
         </h3>
       </div>
 
-      {/* LOWEST SKILL */}
       <div className="bg-white p-4 rounded-xl border shadow-sm">
         <p className="text-xs text-gray-500">Needs Improvement</p>
         <h3 className="text-lg font-semibold capitalize text-gray-800">
@@ -157,7 +153,6 @@ return (
         </h3>
       </div>
 
-      {/* DESCRIPTION */}
       <div className="text-sm text-gray-500 leading-relaxed">
         This chart represents your personality distribution across different
         dimensions. Focus on improving weaker areas while leveraging your
@@ -170,7 +165,7 @@ return (
 
 </div>
 
-        {/* STRENGTHS */}
+     
         <div>
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Your Strengths 💪
@@ -203,7 +198,7 @@ return (
           </div>
         </div>
 
-        {/* CAREERS */}
+   
         <div>
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Recommended Careers 🚀
@@ -244,7 +239,7 @@ return (
           </div>
         </div>
 
-        {/* INSIGHTS */}
+   
         <div>
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Insights 💡
@@ -270,7 +265,7 @@ return (
           </div>
         </div>
 
-        {/* ACTION */}
+      
         <div className="flex justify-between items-center mt-10">
 
           <button
