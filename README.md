@@ -22,10 +22,28 @@
 - Interactive charts using **Recharts**
 - Insight-driven feedback
 
-### 🔐 Authentication & Security
-- JWT-based authentication
-- Protected routes
-- Role-based access (Admin/User)
+### 🔐 Authentication & Authorization
+- Secure login & registration using JWT
+- Protected API routes with middleware
+- Role-based authorization system:
+  - Admin → Full control (manage questions, view all results)
+  - User → Limited access (assessment + personal results)
+
+### 🔐 Role-Based Access Control (RBAC)
+✔ Role-based access control (Admin/Student)
+- **Student Role**
+  - Take assessment test
+  - View personal results & insights
+
+- **Admin Role**
+  - Add new assessment questions
+  - Manage question categories
+  - View all user results
+
+👉 Implemented using:
+- JWT authentication
+- Custom middleware (`authMiddleware`, `adminMiddleware`)
+- Protected routes in frontend & backend
 
 ### ⚙️ Admin Panel
 - Add new assessment questions
